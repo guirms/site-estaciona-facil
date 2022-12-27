@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Estaciona fácil</title>
+</head>
+
+<body>
+    <section class="altura-15">
+    </section>
+    <section class="altura-70 row">
+        <section class="col-lg-6 box-login">
+            <header class="d-flex justify-content-center">
+                <img src="/assets/img/Logo-estaciona-facil.jpeg" class="mt-2 w-75" alt="Logo do site">
+            </header>
+
+            <div class="h-50 mt-2 d-flex align-items-center">
+                <form *ngIf="!baseService.exibeLoad" [formGroup]="loginForm" #formDir="ngForm"
+                    (ngSubmit)="loginSubmit()" class="mt-3 w-75 mx-auto">
+                    <section class="align-items-center">
+                        <mat-form-field appearance="fill" class="d-flex justify-content-center">
+                            <mat-label>Digite seu e-mail</mat-label>
+                            <input matInput [(ngModel)]="email" formControlName="email" required>
+                            <mat-error>E-mail inválido</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="d-flex justify-content-center">
+                            <mat-label>Digite suas senha</mat-label>
+                            <input matInput [type]="exibeSenha ? 'text' : 'password'" [(ngModel)]="senha"
+                                formControlName="senha" required>
+                            <button type="button" mat-icon-button matSuffix (click)="exibeSenha = !exibeSenha"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="exibeSenha">
+                                <mat-icon>{{exibeSenha ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error>Senha inválida</mat-error>
+                        </mat-form-field>
+                    </section>
+
+                    <section class="row bg">
+                        <mat-checkbox appearance="fill" color="primary"
+                            class="col-6 d-flex justify-content-start">Lembrar
+                            senha</mat-checkbox>
+                        <a class="col-6 d-flex justify-content-end mt-2" href="cadastro">Cadastre-se</a>
+                    </section>
+
+                    <footer class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary w-50 mb-3">Entrar</button>
+                    </footer>
+                </form>
+
+                <span *ngIf="baseService.exibeLoad" class="d-flex justify-content-center">
+                    <mat-spinner></mat-spinner>
+                </span>
+            </div>
+        </section>
+
+        <section class="col-lg-6 box-info">
+            <header>
+                <h1 class="mt-3 d-flex justify-content-center">Estacionar nunca foi tão fácil</h1>
+                <h2 class="d-flex justify-content-center"><i>Encontre vagas disponíveis perto de você em poucos
+                        cliques!</i></h2>
+            </header>
+
+            <article class="mt-2">
+                <p>
+                    Atualmente, encontrar uma vaga de estacionamento pode ser uma tarefa muito difícil para os
+                    condutores. Muitas vezes, as cidades são lotadas de carros e não existem mais vagas disponíveis.
+                    Isso significa que os condutores têm que estacionar seus carros em outros lugares,
+                    como estacionamentos privados, que podem ser caros.
+                    Uma solução para esse problema é o Estaciona Fácil,
+                    um site que ajuda os condutores a encontrar vagas de estacionamento de forma automática.
+                    O site permite que os condutores pesquisem por vagas de estacionamento em seu bairro ou em outro
+                    lugar
+                    e exibe todas as vagas disponíveis, além de fornecer informações sobre o valor da vaga, o tempo
+                    limite para estacionar e outras informações úteis. Assim, os condutores podem encontrar facilmente
+                    uma vaga de
+                    estacionamento adequada, economizando tempo e dinheiro.
+                </p>
+            </article>
+        </section>
+
+    </section>
+    <section class="altura-15">
+    </section>
+
+
+    <!-- <header class="d-flex justify-content-center">
+                <img src="/assets/img/Logo-estaciona-facil.jpeg" class="mt-2 w-50" alt="Logo do site">
+            </header>
+
+            <form *ngIf="!baseService.exibeLoad" [formGroup]="loginForm" #formDir="ngForm" (ngSubmit)="loginSubmit()"
+                class="mt-3 w-75 mx-auto">
+                <div>
+                    <label class="form-label">E-mail</label>
+                    <input type="email"
+                        [class]="loginForm.get('email')?.errors && (loginForm.get('email')?.touched || formDir.submitted) ? 'form-control is-invalid' : 'form-control'"
+                        formControlName="email" [(ngModel)]="email">
+                    <p *ngIf="loginForm.get('email')?.errors && (loginForm.get('email')?.touched || formDir.submitted)"
+                        class="mensagem-erro-formulario">E-mail é obrigatório</p>
+                </div>
+                <div class="my-3 row">
+                    <label class="form-label">Senha</label><br>
+                    <div class="col-10">
+                        <input [type]="exibeSenha ? 'text' : 'password'"
+                            [class]="loginForm.get('senha')?.errors && (loginForm.get('senha')?.touched || formDir.submitted) ? 'form-control is-invalid' : 'form-control'"
+                            formControlName="senha" [(ngModel)]="senha">
+                    </div>
+                    <div class="col-2">
+                        <button type="button" class="btn btn-exibe-senha form-control" (click)="exibirSenha()" ><i [class]="exibeSenha ? 'bi bi-eye-slash' : 'bi bi-eye'"></i></button>
+                    </div>
+                        <p *ngIf="loginForm.get('senha')?.errors && (loginForm.get('senha')?.touched || formDir.submitted)"
+                            class="mensagem-erro-formulario">Senha é obrigatória</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" formControlName="lembrarSenha">
+                        <label class="form-check-label">Lembrar senha</label>
+                    </div>
+                    <div>
+                        <label class="me-1">Não possui cadastro?</label>
+                        <a href="cadastro">Cadastre-se</a>
+                    </div>
+                </div>
+
+                <footer class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary w-50 mb-3">Entrar</button>
+                </footer>
+            </form>
+
+            <span *ngIf="baseService.exibeLoad" class="d-flex justify-content-center">
+                <mat-spinner></mat-spinner>
+            </span> -->
+
+
+</body>
+
+</html>

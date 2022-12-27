@@ -14,31 +14,29 @@
     </section>
     <section class="altura-70 row">
         <section class="col-lg-6 box-login">
-            <header class="d-flex justify-content-center">
-                <img src="/assets/img/Logo-estaciona-facil.jpeg" class="mt-2 w-75" alt="Logo do site">
+            <header class="d-flex justify-content-center mt-3">
+                <h1>Login</h1>
             </header>
 
-            <div class="h-50 mt-2 d-flex align-items-center">
                 <form *ngIf="!baseService.exibeLoad" [formGroup]="loginForm" #formDir="ngForm"
-                    (ngSubmit)="loginSubmit()" class="mt-3 w-75 mx-auto">
-                    <section class="align-items-center">
-                        <mat-form-field appearance="fill" class="d-flex justify-content-center">
-                            <mat-label>Digite seu e-mail</mat-label>
-                            <input matInput [(ngModel)]="email" formControlName="email" required>
-                            <mat-error>E-mail inválido</mat-error>
-                        </mat-form-field>
+                    (ngSubmit)="loginSubmit()" class="mt-3 h-50 w-75 mx-auto">
 
-                        <mat-form-field appearance="fill" class="d-flex justify-content-center">
-                            <mat-label>Digite suas senha</mat-label>
-                            <input matInput [type]="exibeSenha ? 'text' : 'password'" [(ngModel)]="senha"
-                                formControlName="senha" required>
-                            <button type="button" mat-icon-button matSuffix (click)="exibeSenha = !exibeSenha"
-                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="exibeSenha">
-                                <mat-icon>{{exibeSenha ? 'visibility_off' : 'visibility'}}</mat-icon>
-                            </button>
-                            <mat-error>Senha inválida</mat-error>
-                        </mat-form-field>
-                    </section>
+                    <mat-form-field appearance="fill" class="d-flex justify-content-center">
+                        <mat-label>Digite seu e-mail</mat-label>
+                        <input matInput [(ngModel)]="email" formControlName="email" required>
+                        <mat-error>E-mail inválido</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="d-flex justify-content-center">
+                        <mat-label>Digite suas senha</mat-label>
+                        <input matInput [type]="exibeSenha ? 'text' : 'password'" [(ngModel)]="senha"
+                            formControlName="senha" required>
+                        <button type="button" mat-icon-button matSuffix (click)="exibeSenha = !exibeSenha"
+                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="exibeSenha">
+                            <mat-icon>{{exibeSenha ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error>Senha inválida</mat-error>
+                    </mat-form-field>
 
                     <section class="row bg">
                         <mat-checkbox appearance="fill" color="primary"
@@ -52,15 +50,14 @@
                     </footer>
                 </form>
 
-                <span *ngIf="baseService.exibeLoad" class="d-flex justify-content-center">
+                <span *ngIf="baseService.exibeLoad" class="d-flex justify-content-center mt-5">
                     <mat-spinner></mat-spinner>
                 </span>
-            </div>
         </section>
 
         <section class="col-lg-6 box-info">
             <header>
-                <h1 class="mt-3 d-flex justify-content-center">Estacionar nunca foi tão fácil</h1>
+                <h1 class="mt-3 d-flex justify-content-center">Estacionar nunca foi tão fácil!</h1>
                 <h2 class="d-flex justify-content-center"><i>Encontre vagas disponíveis perto de você em poucos
                         cliques!</i></h2>
             </header>

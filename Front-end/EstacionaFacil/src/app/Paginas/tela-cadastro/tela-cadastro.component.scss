@@ -1,6 +1,32 @@
 body { 
-    background: url("/assets/img/Background-tela-login.jpg"); 
+    overflow-x: hidden; 
+    background: url("/assets/img/aquiii.png"); 
     background-repeat: no-repeat;
     height: 100vh;
     background-size: cover;
+}
+
+.altura-15 {
+    height: 15%;
+}
+
+.altura-70 {
+    height: 70%;
+}
+
+h3 {
+    color: rgb(255, 136, 0);
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.box-cadastro {
+    width: 500px;
+    height: 450px;
+    margin: auto;
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px 20px 30px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }

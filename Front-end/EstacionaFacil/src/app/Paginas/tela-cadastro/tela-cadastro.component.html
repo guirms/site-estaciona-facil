@@ -9,46 +9,54 @@
 </head>
 
 <body>
-    <main class="container h-100 d-flex align-items-center justify-content-center">
-        <section class="bg-white rounded col-lg-6 col-md-8 col-sm-10 col-12">
+    <section class="altura-15">
+    </section>
+    <section class="altura-70 row">
+        <main class="box-cadastro">
             <header class="d-flex justify-content-center">
-                <img src="/assets/img/Logo-estaciona-facil.jpeg" class="mt-2 w-50" alt="Logo do site">
+                <img src="/assets/img/logo.png" class="row mt-2 w-25" alt="Logo do site">
             </header>
 
-            <form [formGroup]="cadastroForm" #formDir="ngForm" (ngSubmit)="cadastroSubmit()" class="mt-3 w-75 mx-auto">
-                <div>
-                    <label class="form-label me-3">E-mail de registro</label>
-                    <input type="email"
-                        [class]="cadastroForm.get('email')?.errors && (cadastroForm.get('email')?.touched || formDir.submitted) ? 'form-control is-invalid' : 'form-control'"
-                        formControlName="email" [(ngModel)]="email">
-                    <p *ngIf="cadastroForm.get('email')?.errors && (cadastroForm.get('email')?.touched || formDir.submitted)"
-                        class="mensagem-erro-formulario">E-mail é obrigatório</p>
-                </div>
-                <div class="my-3">
-                    <label class="form-label me-3">Senha</label>
-                    <input type="password"
-                        [class]="cadastroForm.get('senha')?.errors && (cadastroForm.get('senha')?.touched || formDir.submitted) ? 'form-control is-invalid' : 'form-control'"
-                        formControlName="senha" [(ngModel)]="senha">
-                    <p *ngIf="cadastroForm.get('senha')?.errors && (cadastroForm.get('senha')?.touched || formDir.submitted)"
-                        class="mensagem-erro-formulario">Senha é obrigatória</p>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label me-3">Confirme sua senha</label>
-                    <input type="password"
-                        [class]="(cadastroForm.get('senha')?.value != cadastroForm.get('confirmacaoSenha')?.value) && cadastroForm.get('confirmacaoSenha')?.touched ? 'form-control is-invalid' : 'form-control'"
-                        formControlName="confirmacaoSenha" [(ngModel)]="confirmacaoSenha" (change)="senhasSaoDiferentes()">
-                    <p *ngIf="cadastroForm.get('confirmacaoSenha')?.errors?.required && (cadastroForm.get('confirmacaoSenha')?.touched || formDir.submitted)"
-                        class="mensagem-erro-formulario">Confirmar senha é obrigatório</p>
-                    <p *ngIf="senhasSaoDiferentes()"
-                        class="mensagem-erro-formulario">As senhas não são iguais</p>
-                </div>
+            <form *ngIf="!baseService.exibeLoad" [formGroup]="cadastroForm" #formDir="ngForm"
+                (ngSubmit)="cadastroSubmit()" class="mt-3 w-75 mx-auto">
+
+                <mat-form-field appearance="fill" class="d-flex justify-content-center">
+                    <mat-label>Digite seu e-mail</mat-label>
+                    <input matInput [(ngModel)]="email" formControlName="email" required>
+                    <mat-error>E-mail inválido</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="d-flex justify-content-center">
+                    <mat-label>Digite sua senha</mat-label>
+                    <input matInput [type]="exibeSenha ? 'text' : 'password'" [(ngModel)]="senha"
+                        formControlName="senha" required>
+                    <mat-error>Senha inválida</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="d-flex justify-content-center">
+                    <mat-label>Repita a senha</mat-label>
+                    <input matInput [type]="exibeSenha ? 'text' : 'password'" [(ngModel)]="confirmacaoSenha"
+                        formControlName="confirmacaoSenha" required>
+                    <button type="button" mat-icon-button matSuffix (click)="exibeSenha = !exibeSenha"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="exibeSenha">
+                        <mat-icon>{{exibeSenha ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error>Senha inválida</mat-error>
+                </mat-form-field>
+                <p *ngIf="senhasSaoDiferentes()" class="mensagem-erro-formulario">As senhas não são iguais</p>
+
                 <footer class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-primary w-50 mb-3">Entrar</button>
                 </footer>
             </form>
-        </section>
-    </main>
 
+            <span *ngIf="baseService.exibeLoad" class="d-flex justify-content-center mt-5">
+                <mat-spinner></mat-spinner>
+            </span>
+        </main>
+    </section>
+    <section class="altura-15">
+    </section>
 </body>
 
 </html>

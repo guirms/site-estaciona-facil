@@ -10,16 +10,23 @@
 </head>
 
 <body>
-    <section class="altura-15">
+    <section class="altura-box-login">
     </section>
-    <section class="altura-70 row">
-        <section class="col-lg-6 box-login">
-            <header class="d-flex justify-content-center mt-3">
-                <h1>Login</h1>
-            </header>
+    <section class="altura-40 row">
+        <section class="box-login d-flex justify-content-center">
+            <div class="col-6 align-items-center d-flex justify-content-center">
+                <img src="/assets/img/img-box-login.jpg" class="img-box-login " width="90%" height="87%" alt="">
+            </div>
+
+            <div class="col-6 mt-5">
+                <header class="d-flex flex-column justify-content-center">
+                    <h1>Entre agora mesmo</h1>
+                    <h3>E encontre as vagas mais próximas de você!</h3>
+                    <img src="assets/img/logo-estaciona-facil.png" class="mt-3" alt="Logo do site">
+                </header>
 
                 <form *ngIf="!baseService.exibeLoad" [formGroup]="loginForm" #formDir="ngForm"
-                    (ngSubmit)="loginSubmit()" class="mt-3 h-50 w-75 mx-auto">
+                    (ngSubmit)="loginSubmit()" class="h-50 largura-campos mx-auto">
 
                     <mat-form-field appearance="fill" class="d-flex justify-content-center">
                         <mat-label>Digite seu e-mail</mat-label>
@@ -43,43 +50,16 @@
                             class="col-6 d-flex justify-content-start">Lembrar
                             senha</mat-checkbox>
                         <a class="col-6 d-flex justify-content-end mt-2" href="cadastro">Cadastre-se</a>
+                        <button type="submit" class="btn btn-primary d-flex justify-content-center mt-3">Entrar</button>
                     </section>
-
-                    <footer class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary w-50 mb-3">Entrar</button>
-                    </footer>
                 </form>
 
                 <span *ngIf="baseService.exibeLoad" class="d-flex justify-content-center mt-5">
                     <mat-spinner></mat-spinner>
                 </span>
+            </div>
+            
         </section>
-
-        <section class="col-lg-6 box-info">
-            <header>
-                <h1 class="mt-3 d-flex justify-content-center">Estacionar nunca foi tão fácil!</h1>
-                <h2 class="d-flex justify-content-center"><i>Encontre vagas disponíveis perto de você em poucos
-                        cliques!</i></h2>
-            </header>
-
-            <article class="mt-2">
-                <p>
-                    Atualmente, encontrar uma vaga de estacionamento pode ser uma tarefa muito difícil para os
-                    condutores. Muitas vezes, as cidades são lotadas de carros e não existem mais vagas disponíveis.
-                    Isso significa que os condutores têm que estacionar seus carros em outros lugares,
-                    como estacionamentos privados, que podem ser caros.
-                    Uma solução para esse problema é o Estaciona Fácil,
-                    um site que ajuda os condutores a encontrar vagas de estacionamento de forma automática.
-                    O site permite que os condutores pesquisem por vagas de estacionamento em seu bairro ou em outro
-                    lugar
-                    e exibe todas as vagas disponíveis, além de fornecer informações sobre o valor da vaga, o tempo
-                    limite para estacionar e outras informações úteis. Assim, os condutores podem encontrar facilmente
-                    uma vaga de
-                    estacionamento adequada, economizando tempo e dinheiro.
-                </p>
-            </article>
-        </section>
-
     </section>
     <section class="altura-15">
     </section>

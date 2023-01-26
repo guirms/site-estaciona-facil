@@ -59,6 +59,19 @@ a {
     font-size: medium;
 }
 
+@media only screen and (min-width: 600px) 
+{
+    .img-box-login {
+        background: url("/assets/img/img-box-login.jpg"); 
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-top: 5%;
+        height: 87%;
+        width: 47%;
+        border-radius: 30px;
+
+    }
+}
  
 
 

@@ -13,8 +13,10 @@
     </section>
     <section class="altura-70 row">
         <main class="box-cadastro">
-            <header class="d-flex justify-content-center">
-                <img src="/assets/img/logo.png" class="row mt-2 w-25" alt="Logo do site">
+            <header class="d-flex flex-column justify-content-center mt-3">
+                <h1>Cadastre-se agora</h1>
+                <h3>e encontre sua vaga rapidamente!</h3>
+                <img src="/assets/img/logo-estaciona-facil.png" class="row mt-4" alt="Logo do site">
             </header>
 
             <form *ngIf="!baseService.exibeLoad" [formGroup]="cadastroForm" #formDir="ngForm"

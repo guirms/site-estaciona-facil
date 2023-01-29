@@ -38,7 +38,7 @@ Para usar Estaciona Fácil, siga estas etapas:
 
 ## 🤝 Contato
 
-Qualquer dúvida ou sujestão específica, por favor não existe em criar Issues, que serão respondidas o mais rápido possível.
+Qualquer dúvida ou sugestão específica, por favor não hesite em criar Issues, que serão respondidas o mais rápido possível.
 
 - Caso deseje um contato mais direto, por favor me contate via Linkedin ou Gmail:
 <div>

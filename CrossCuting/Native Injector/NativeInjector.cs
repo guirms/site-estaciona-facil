@@ -4,6 +4,8 @@ using Application.Services;
 using FluentValidation;
 using Infra.Data.Interfaces;
 using Infra.Data.Repositories;
+using Infra.MessagePublisher.Interfaces;
+using Infra.MessagePublisher.RabbitMQ;
 using Microsoft.Extensions.DependencyInjection;
 using static Application.Validators.UsuarioValidator;
 
@@ -18,5 +20,6 @@ public static class NativeInjector
         services.AddScoped<IUsuarioRepository, UsuarioRepository>();
         services.AddScoped<IValidator<UsuarioCadastroRequest>, UsuarioCadastroValidator>();
         services.AddScoped<IValidator<UsuarioLoginRequest>, UsuarioLoginValidator>();
+        services.AddTransient<IMessageSender, RabbitMqConfig>();
     }
 }

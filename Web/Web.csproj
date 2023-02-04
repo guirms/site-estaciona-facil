@@ -23,7 +23,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Application\Application.csproj" />
-      <ProjectReference Include="..\CrossCuting\CrossCuting.csproj" />
+      <ProjectReference Include="..\CrossCuting\Infra.CrossCuting.csproj" />
       <ProjectReference Include="..\Infra.Data\Infra.Data.csproj" />
     </ItemGroup>
 

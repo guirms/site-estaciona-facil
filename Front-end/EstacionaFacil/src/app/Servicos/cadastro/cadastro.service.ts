@@ -13,19 +13,29 @@ export class CadastroService {
   constructor(private baseService: BaseService<ResponseBaseModel<CadastroModel>>) { }
 
   async fazerCadastro(email: string, senha: string, confirmacaoSenha: string): Promise<ResponseBaseModel<CadastroModel>> {
-
     const body = {
       Email: email,
       Senha: senha,
       ConfirmacaoSenha: confirmacaoSenha
     }
 
-    const requisicaoLogin = await lastValueFrom(this.baseService.post(`${environment.url}Usuario/CadastrarUsuario`, body))
+    this.baseService.setarExibeLoad(true);
+
+    let requisicaoCadastro= await lastValueFrom(this.baseService.post(`${environment.url}Usuario/CadastrarUsuario`, body))
       .catch(ex => {
         return ex.message;
       });
 
-    return requisicaoLogin;
+    if (typeof (requisicaoCadastro) === 'string') {
+      requisicaoCadastro = undefined;
+      requisicaoCadastro = {
+        mensagem: 'Erro durante requisição HTTP'
+      }
+    }
+
+    this.baseService.setarExibeLoad(false);
+
+    return requisicaoCadastro;
   }
 
 }

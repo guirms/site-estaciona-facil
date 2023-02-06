@@ -35,7 +35,7 @@ export class TelaLoginComponent implements OnInit {
   }
 
   async loginSubmit(): Promise<void> {
-    if (this.email && this.senha) {
+    if (this.loginForm.valid && this.senha) {
       var requisicaoLogin = await this.loginService.fazerLogin(this.email, this.senha);
       if (requisicaoLogin.sucesso) {
         this.toastrService.success(requisicaoLogin.mensagem);

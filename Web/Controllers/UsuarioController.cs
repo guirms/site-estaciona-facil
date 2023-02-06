@@ -21,7 +21,7 @@ public class UsuarioController: ControllerBase
     {
         try
         {
-            if (usuarioLoginRequest != null)
+            if (usuarioLoginRequest == null)
                 throw new NullReferenceException("Usuário nulo");
             
             var cadastrarUsuario = _usuarioService.RealizarLogin(usuarioLoginRequest);

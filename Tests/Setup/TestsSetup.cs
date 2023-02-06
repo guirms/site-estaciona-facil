@@ -1,5 +1,8 @@
 ﻿using Application.Interfaces;
+using Application.Objects.Requests.Usuario;
+using Application.Validators;
 using AutoMapper;
+using FluentValidation;
 using Infra.Data.Interfaces;
 using Moq;
 
@@ -18,8 +21,17 @@ public class TestsSetup
     protected readonly Mock<IUsuarioRepository> UsuarioRepositoryMock;
     protected readonly Mock<IAutenticacaoService> AutenticacaoServiceMock;
 
-    #endregion
+    #endregion FluentValidation
 
+    #region Validators
+
+    protected readonly Mock<IValidator<UsuarioCadastroRequest>> UsuarioCadastroValidatorMock = new ();
+    protected readonly Mock<IValidator<UsuarioLoginRequest>> UsuarioLoginValidatorMock = new ();
+    protected readonly UsuarioValidator.UsuarioCadastroValidator UsuarioCadastroInstantiedValidator = new ();
+    protected readonly UsuarioValidator.UsuarioLoginValidator UsuarioLoginInstantiedValidator = new ();
+
+
+    #endregion
     
     public TestsSetup()
     {

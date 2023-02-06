@@ -13,7 +13,6 @@ export class LoginService {
   constructor(private baseService: BaseService<ResponseBaseModel<LoginModel>>) { }
 
   async fazerLogin(email: string, senha: string): Promise<ResponseBaseModel<LoginModel>> {
-
     const body = {
       Email: email,
       Senha: senha

@@ -8,6 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Controllers\IMessageSender.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="AutoMapper" Version="11.0.1" />
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
@@ -25,6 +29,7 @@
       <ProjectReference Include="..\Application\Application.csproj" />
       <ProjectReference Include="..\CrossCuting\Infra.CrossCuting.csproj" />
       <ProjectReference Include="..\Infra.Data\Infra.Data.csproj" />
+      <ProjectReference Include="..\MessageSender\Infra.MessagePublisher.csproj" />
     </ItemGroup>
 
 </Project>

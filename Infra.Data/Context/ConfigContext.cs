@@ -18,11 +18,4 @@ public class ConfigContext: DbContext
         
         base.OnModelCreating(modelBuilder);
     }
-    
-    // protected override void OnModelCreating(ModelBuilder modelBuilder)
-    // {
-    //     base.OnModelCreating(modelBuilder);
-    //
-    //     modelBuilder.ApplyConfigurationsFromAssembly(typeof(ConfigContext).Assembly);
-    // }
 }

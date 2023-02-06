@@ -3,7 +3,6 @@ using Infra.Data.Interfaces;
 
 namespace Infra.Data.Repositories;
 
-// Se precisar sobreescrever algum método, utilizar este como "virtual"
 public class BaseRepository<T>: IBaseRepository<T> where T : class
 {
     protected readonly ConfigContext Contexto;

@@ -1,6 +1,4 @@
 ﻿using Application.Objects.Bases;
-using Application.Objects.Requests.Usuario;
-using Infra.MessagePublisher.DTOs.MessageSenderDtos;
 using Infra.MessagePublisher.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +9,11 @@ namespace Web.Controllers;
 [Route("Vaga")]
 public class VagaController : ControllerBase
 {
-    private readonly IMessageSender _messageSender;
+    private readonly IRabbitMqConfig _rabbitMqConfig;
 
-    public VagaController(IMessageSender messageSender)
+    public VagaController(IRabbitMqConfig rabbitMqConfig)
     {
-        _messageSender = messageSender;
+        _rabbitMqConfig = rabbitMqConfig;
     }
 
     [HttpPost("GerarRelatorio")]
@@ -26,7 +24,7 @@ public class VagaController : ControllerBase
             if (qtdLinhas == 0)
                 throw new InvalidOperationException("Não é possível gerar um relatório sem linhas");
 
-            _messageSender.Publicar(new MessageSenderDataDto(qtdLinhas));
+            _rabbitMqConfig.Publicar(new MessageSenderRequest(qtdLinhas));
 
             return ResponseBase.ResponderController(true, "Relatório gerado com sucesso");
         }

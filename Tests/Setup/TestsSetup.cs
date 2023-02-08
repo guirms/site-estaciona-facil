@@ -1,10 +1,4 @@
-﻿using Application.Interfaces;
-using Application.Objects.Requests.Usuario;
-using Application.Validators;
-using AutoMapper;
-using FluentValidation;
-using Infra.Data.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Moq;
 
 namespace Tests.Setup;

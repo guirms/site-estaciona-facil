@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Tests.Usuario.Service;
 
-public class CadastrarUsuarioTest : UsuarioCollection
+public class CadastrarUsuarioTest : UsuarioFixture
 {
     [Fact(DisplayName = "Usuario já existente")]
     [Trait("UsuarioService", "CadastrarUsuario")]

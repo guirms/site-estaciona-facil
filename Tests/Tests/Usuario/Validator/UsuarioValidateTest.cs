@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Tests.Tests.Usuario.Validator;
 
-public class UsuarioValidateTest : UsuarioCollection
+public class UsuarioValidateTest : UsuarioFixture
 {
     [Fact(DisplayName = "Email inválido")]
     [Trait("UsuarioValidator", "UsuarioCadastroValidator")]

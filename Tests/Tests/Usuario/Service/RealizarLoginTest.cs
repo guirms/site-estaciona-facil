@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Tests.Tests.Usuario.Service;
 
-public class RealizarLoginTest : UsuarioCollection
+public class RealizarLoginTest : UsuarioFixture
 {
     [Fact(DisplayName = "Id de usuário nulo")]
     [Trait("UsuarioAppService", "AlterarSenha")]

@@ -1,7 +1,6 @@
-﻿namespace Infra.MessagePublisher.Interfaces
+﻿namespace Infra.MessagePublisher.Interfaces;
+
+public interface IRabbitMqConfig
 {
-    public interface IRabbitMqConfig
-    {
-        void Publicar(MessageSenderRequest data);
-    }
+    void Publicar(MessageSenderRequest data);
 }

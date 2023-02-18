@@ -1,0 +1,4 @@
+﻿dotnet ef migrations add NOME_MIGRATION --startup-project ../Web/
+dotnet ef database update NOME_MIGRATION --startup-project ../Web/
+dotnet ef migrations remove NOME_MIGRATION --startup-project ../Web/
+

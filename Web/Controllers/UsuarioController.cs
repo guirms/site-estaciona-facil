@@ -3,6 +3,7 @@ using Application.Objects.Bases;
 using Application.Objects.Requests.Usuario;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Web.Hubs.Interfaces;
 
 namespace Web.Controllers;
 
@@ -11,9 +12,11 @@ namespace Web.Controllers;
 public class UsuarioController: ControllerBase
 {
     private readonly IUsuarioService _usuarioService;
-    public UsuarioController(IUsuarioService usuarioService)
+    private readonly IRelatorioHub _relatorioHub;
+    public UsuarioController(IUsuarioService usuarioService, IRelatorioHub relatorioHub)
     {
         _usuarioService = usuarioService;
+        _relatorioHub = relatorioHub;
     }
     
     [HttpPost("RealizarLogin")]
@@ -50,5 +53,11 @@ public class UsuarioController: ControllerBase
         {
             return ResponseBase.ResponderController(false, e.Message);
         }
+    }
+
+    [HttpPost("Teste")]
+    public void Teste(string testeRequest)
+    {
+        _relatorioHub.OnTesteAsync(testeRequest);
     }
 }

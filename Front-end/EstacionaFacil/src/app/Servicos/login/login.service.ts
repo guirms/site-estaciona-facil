@@ -4,13 +4,19 @@ import { LoginModel } from 'src/app/Interfaces/login/login-model';
 import { ResponseBaseModel } from 'src/app/Interfaces/response-base/response-base-model';
 import { environment } from 'src/environments/environment';
 import { BaseService } from '../base/base.service';
+import * as signalR from '@microsoft/signalr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private baseService: BaseService<ResponseBaseModel<LoginModel>>) { }
+  private _hubConnection!: signalR.HubConnection;
+
+  constructor(private baseService: BaseService<ResponseBaseModel<LoginModel>>) {
+    this.conectarHub();
+    this.assignOnTesteAsync();
+  }
 
   async fazerLogin(email: string, senha: string): Promise<ResponseBaseModel<LoginModel>> {
     const body = {
@@ -25,7 +31,7 @@ export class LoginService {
         return ex.message;
       });
 
-    if (typeof(requisicaoLogin) === 'string') {
+    if (typeof (requisicaoLogin) === 'string') {
       requisicaoLogin = undefined;
       requisicaoLogin = {
         mensagem: 'Erro durante requisição HTTP'
@@ -39,4 +45,17 @@ export class LoginService {
     return requisicaoLogin;
   }
 
+  assignOnTesteAsync(): void {
+    this._hubConnection.on('OnTesteAsync', (testeRequest: string) => {
+      console.log(testeRequest);
+    });
+
+    this._hubConnection.start();
+  }
+
+  private conectarHub(): void {
+    this._hubConnection = new signalR.HubConnectionBuilder()
+    .withUrl("https://localhost:7253/relatorioHub")
+    .build();
+  }
 }

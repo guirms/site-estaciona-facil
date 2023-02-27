@@ -18,8 +18,10 @@ public static class NativeInjector
         services.AddScoped<IUsuarioService, UsuarioService>();
         services.AddScoped<IAutenticacaoService, AutenticacaoService>();
         services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
         services.AddScoped<IValidator<UsuarioCadastroRequest>, UsuarioCadastroValidator>();
         services.AddScoped<IValidator<UsuarioLoginRequest>, UsuarioLoginValidator>();
+
         services.AddSingleton<IRabbitMqConfig, RabbitMqConfig>();
     }
 }

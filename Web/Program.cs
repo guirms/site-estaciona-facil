@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Web.Filters;
+using Web.Hubs.Interfaces;
+using Web.Hubs;
+using Domain.Helper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +24,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ConfigContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("EstacionaFacilDb") ?? string.Empty).EnableSensitiveDataLogging());
 builder.Services.AddAutoMapper(typeof(Application.AutoMapper.AutoMapper));
+
+// SignalR
+builder.Services.AddSignalR();
 
 // CORS policy
 builder.Services.AddCors(options =>
@@ -73,7 +79,6 @@ builder.Services.AddSwaggerGen(option =>
 });
 
 // JWT Authentication
-
 builder.Services.AddAuthorization(auth =>
 {
     auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
@@ -85,7 +90,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options => {
         options.TokenValidationParameters = new TokenValidationParameters{
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["SecretKey"])),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["SecretKey"].GetSafeValue())),
             ValidateIssuer = false,
             ValidateAudience = false
         };
@@ -93,6 +98,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 // Dependency Injector
 NativeInjector.RegisterServices(builder.Services);
+builder.Services.AddScoped<IRelatorioHub, RelatorioHub>();
 
 var app = builder.Build();
 
@@ -104,6 +110,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
 
 // CORS policy
 app.UseCors("CorsPolicy");
@@ -111,6 +118,9 @@ app.UseCors("CorsPolicy");
 // JWT Authentication
 app.UseAuthentication();
 app.UseAuthorization();
+
+// SignalR
+app.MapHub<RelatorioHub>("/relatorioHub");
 
 app.MapControllers();
 

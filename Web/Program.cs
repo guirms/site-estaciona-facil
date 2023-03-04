@@ -16,17 +16,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 // Allows both to access and to set up the config
-ConfigurationManager configuration = builder.Configuration; 
+ConfigurationManager configuration = builder.Configuration;
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<ConfigContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("EstacionaFacilDb") ?? string.Empty).EnableSensitiveDataLogging());
-builder.Services.AddAutoMapper(typeof(Application.AutoMapper.AutoMapper));
 
-// SignalR
-builder.Services.AddSignalR();
+// Entity Framework
+builder.Services.AddDbContext<ConfigContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("EstacionaFacilDb") ?? string.Empty).EnableSensitiveDataLogging());
+
+// AutoMapper
+builder.Services.AddAutoMapper(typeof(Application.AutoMapper.AutoMapper));
 
 // CORS policy
 builder.Services.AddCors(options =>
@@ -50,30 +51,30 @@ builder.Services.AddSwaggerGen(option =>
     option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Name = "Authorization", 
-        Type = SecuritySchemeType.ApiKey, 
-        Scheme = "Bearer", 
-        BearerFormat = "JWT", 
-        In = ParameterLocation.Header, 
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
         Description = @"JWT Authorization header using the Bearer scheme.
             \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.
-        \r\n\r\nExample: Bearer 12345abcdef", 
+        \r\n\r\nExample: Bearer 12345abcdef",
     });
     option.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
-            new OpenApiSecurityScheme 
-            { 
-                Reference = new OpenApiReference 
-                { 
-                    Type = ReferenceType.SecurityScheme, 
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
                     Id = "Bearer",
                 } ,
                 Scheme = "oauth2",
                 Name = "Bearer",
                 In = ParameterLocation.Header,
-            }, 
-            new string[] {} 
+            },
+            new string[] {}
         }
     });
 });
@@ -88,7 +89,8 @@ builder.Services.AddAuthorization(auth =>
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options => {
-        options.TokenValidationParameters = new TokenValidationParameters{
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["SecretKey"].GetSafeValue())),
             ValidateIssuer = false,
@@ -99,6 +101,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 // Dependency Injector
 NativeInjector.RegisterServices(builder.Services);
 builder.Services.AddScoped<IRelatorioHub, RelatorioHub>();
+
+// SignalR
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -120,7 +125,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // SignalR
-app.MapHub<RelatorioHub>("/relatorioHub");
+app.MapHub<RelatorioHub>("/chatHub");
+
 
 app.MapControllers();
 

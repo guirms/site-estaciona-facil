@@ -2,12 +2,15 @@
 
 namespace Web.Hubs.Default
 {
-    public class DefaultHub<T> : Hub<T> where T : class
+    public class DefaultHub<T> : Hub<T> where T : Hub
     {
         private readonly string _groupName;
-        public DefaultHub(string groupName)
+        protected readonly IHubContext<T> _hubContext;
+
+        public DefaultHub(string groupName, IHubContext<T> hubContext)
         {
             _groupName = groupName;
+            _hubContext = hubContext;
         }
 
         public override async Task OnConnectedAsync()

@@ -41,7 +41,6 @@ builder.Services.AddCors(options =>
                 .AllowCredentials();
         });
 });
-//builder.Services.AddCors();
 
 builder.Services.AddMvc(opts =>
 {
@@ -121,11 +120,6 @@ app.UseRouting();
 
 // CORS policy
 app.UseCors("CorsPolicy");
-//app.UseCors(x =>
-//{
-//    x.WithOrigins("http://localhost:4200");
-//    x.AllowAnyHeader().AllowAnyMethod().AllowCredentials();
-//});
 
 // JWT Authentication
 app.UseAuthentication();

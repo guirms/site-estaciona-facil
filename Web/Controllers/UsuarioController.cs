@@ -1,8 +1,12 @@
 ﻿using Application.Interfaces;
 using Application.Objects.Bases;
 using Application.Objects.Requests.Usuario;
+using iText.Kernel.Pdf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
+using System.Text;
 using Web.Hubs.Interfaces;
 
 namespace Web.Controllers;
@@ -56,9 +60,18 @@ public class UsuarioController : ControllerBase
         }
     }
 
+
     [HttpPost("Teste")]
-    public void Teste(string testeRequest)
+    public async Task<IActionResult> UploadArquivo()
     {
-        _relatorioHub.OnTesteAsync(testeRequest);
+        // Cria um fluxo de saída para o arquivo
+        string caminhoArquivo = @"C:\Users\user\Desktop\meuDocumento.pdf";
+        using var stream = new FileStream(caminhoArquivo, FileMode.Create);
+
+        // Copia o conteúdo da requisição diretamente para o fluxo de saída
+        await Request.Body.CopyToAsync(stream);
+
+        return Ok();
     }
+
 }

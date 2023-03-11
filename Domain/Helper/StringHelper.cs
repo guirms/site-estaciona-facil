@@ -1,6 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
-
-namespace Domain.Helper;
+﻿namespace Domain.Helper;
 
 public static class StringHelper
 {
